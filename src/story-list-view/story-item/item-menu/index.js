@@ -9,7 +9,7 @@ const { prompt } = require('../../../dialogs/prompt');
 const locale = require('../../../locale');
 const { publishStoryWithFormat } = require('../../../data/publish');
 const save = require('../../../file/save');
-
+const post = require('../../../file/post');
 module.exports = Vue.extend({
 	template: require('./index.html'),
 
@@ -68,7 +68,17 @@ module.exports = Vue.extend({
 				);
 			});
 		},
-
+		share() {
+			this.loadFormat(
+				this.story.storyFormat,
+				this.story.storyFormatVersion
+			).then(format => {
+				post(
+					publishStoryWithFormat(this.appInfo, this.story, format),
+					this.story.name + '.html'
+				);
+			});
+		},
 		/**
 		 Shows a confirmation before deleting the model.
 
