@@ -4,6 +4,7 @@ const Vue = require('vue');
 const AboutDialog = require('../../dialogs/about');
 const FormatsDialog = require('../../dialogs/formats');
 const ImportDialog = require('../../dialogs/story-import');
+const ImportDialogUrl = require('../../dialogs/story-import/importUrl');
 const { createStory } = require('../../data/actions/story');
 const locale = require('../../locale');
 const { prompt } = require('../../dialogs/prompt');
@@ -56,7 +57,12 @@ module.exports = Vue.extend({
 				data: { origin: e.target }
 			}).$mountTo(document.body);
 		},
-
+		importUrl(e) {
+			new ImportDialogUrl({
+				store: this.$store,
+				data: { origin: e.target }
+			}).$mountTo(document.body);
+		},
 		saveArchive() {
 			const timestamp = new Date().toLocaleString().replace(/[\/:\\]/g, '.');
 

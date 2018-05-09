@@ -13,6 +13,11 @@
 			</button>
 		</li>
 		<li>
+			<button class="block" @click="importUrl" title="{{ 'Import a published story or Twine archive from URL' | say }}">
+				<i class="fa fa-upload"></i> {{'Import From Url' | say}}
+			</button>
+		</li>
+		<li>
 			<button class="block" @click="saveArchive" title="{{'Save all stories to a Twine archive file' | say }}">
 				<i class="fa fa-briefcase"></i> {{ 'Archive' | say}}
 			</button>
