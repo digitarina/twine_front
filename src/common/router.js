@@ -10,6 +10,7 @@ const { loadFormat } = require('../data/actions/story-format');
 const { publishStoryWithFormat } = require('../data/publish');
 const replaceUI = require('../ui/replace');
 const store = require('../data/store');
+const checkStorage = require('../dialogs/story-import/importFromStorage');
 
 Vue.use(VueRouter);
 

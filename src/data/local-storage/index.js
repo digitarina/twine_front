@@ -77,6 +77,12 @@ module.exports = store => {
 					imported.passages.forEach(
 						passage => story.savePassage(transaction, passage)
 					);
+
+					var prevUrl = document.referrer.split('/')
+					if(prevUrl[prevUrl.length - 2] == 'story'){
+						window.location = 'http://localhost:8000/#!/stories/' + imported.id + '/play'
+					}
+
 				});
 				break;
 
