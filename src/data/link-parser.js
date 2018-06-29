@@ -6,24 +6,37 @@ e.g. those pointing to other passages in a story, not to an external web site.
 'use strict';
 
 /* The top level regular expression to catch links -- i.e. [[link]]. */
-const extractLinkTags = (text) => text.match(/\[\[.*?\]\]/g) || [];
-
+const extractLinkTags = (text) =>{
+	return text.match(/\[\[.*?\]\]/g) || (text.match(/\(.*?\)/g) == null ? [] : text.match(/\(.*?\)/g).filter(x => x.split(' ')[0] == '(goto:' )) || [];
+}
 /* Links _not_ starting with a protocol, e.g. abcd://. */
-const internalLinks = link => !/^\w+:\/\/\/?\w/i.test(link);
+const internalLinks = link =>{
+	return !/^\w+:\/\/\/?\w/i.test(link);
+}
 
-const nonEmptyLinks = link => link !== '';
+const nonEmptyLinks = link =>{
+	return link !== '';
+} 
 
 /* Identifies values that appear only once in the array. */
-const uniques = (v, i, a) => a.indexOf(v) === i;
+const uniques = (v, i, a) =>{
+	return a.indexOf(v) === i; 
+}
 
 /* Setter is the second [] block if exists. */
 const removeSetters = link => {
 	const noSetter = getField(link, '][', 0);
-
 	return typeof (noSetter) !== 'undefined' ? noSetter : link;
 };
 
-const removeEnclosingBrackets = link => link.substr(2, link.length - 4);
+const removeEnclosingBrackets = link =>{
+	if(link[0] === '['){
+		return link.substr(2, link.length - 4);
+	}else if(link[0] === '('){
+		return link.substr(1, link.length - 2).replace(/'/g, '')
+	}
+
+} 
 
 /*
 Split the link by the separator and return the field in the
@@ -36,20 +49,22 @@ const getField = (link, separator, index) => {
 		/* Separator not present. */
 		return undefined;
 	}
-
 	return (index < 0) ? fields[fields.length + index] : fields[index];
 };
 
 const extractLink = (tagContent) => {
-	/*
-	Arrow links:
-	[[display text->link]] format
-	[[link<-display text]] format
-	
-	Interpret the rightmost '->' and the leftmost '<-' as the divider.
-	*/
-
-	return getField(tagContent, '->', -1) ||
+		   /*
+		 	goto: string  
+		   */																						
+	return tagContent.includes("goto") ? tagContent.substr(tagContent.indexOf(' ') +1).replace(/["]+/g, '') :
+																			
+		   /*Arrow links:
+		   [[display text->link]] format
+		   [[link<-display text]] format
+		   
+		   Interpret the rightmost '->' and the leftmost '<-' as the divider.
+		   */
+		   getField(tagContent, '->', -1) ||
 		   getField(tagContent, '<-', 0) ||
 
 		   /*
@@ -57,23 +72,21 @@ const extractLink = (tagContent) => {
 		   [[display text|link]] format
 		   */
 		   getField(tagContent, '|', -1) ||
-		   
 		   /* [[link]] format */
 		   tagContent;
+		   
 };
 										   
 module.exports = (text, internalOnly) => {
 	/*
 	Link matching regexps ignore setter components, should they exist.
 	*/
-
 	let result = extractLinkTags(text)
 		.map(removeEnclosingBrackets)
 		.map(removeSetters)
 		.map(extractLink)
 		.filter(nonEmptyLinks)
 		.filter(uniques);
-
 	if (internalOnly) {
 		result = result.filter(internalLinks);
 	}
