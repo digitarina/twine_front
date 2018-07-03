@@ -7,7 +7,7 @@ e.g. those pointing to other passages in a story, not to an external web site.
 
 /* The top level regular expression to catch links -- i.e. [[link]]. */
 const extractLinkTags = (text) =>{
-	return text.match(/\[\[.*?\]\]/g) || (text.match(/\(.*?\)/g) == null ? [] : text.match(/\(.*?\)/g).filter(x => x.split(' ')[0] == '(goto:' )) || [];
+	return text.match(/\[\[.*?\]\]/g) || (text.match(/\(.*?\)/g) == null ? [] : text.match(/\(.*?\)/g).filter(x => x.split(' ')[0] == '(goto' )) || [];
 }
 /* Links _not_ starting with a protocol, e.g. abcd://. */
 const internalLinks = link =>{
