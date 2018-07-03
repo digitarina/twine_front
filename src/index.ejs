@@ -37,44 +37,6 @@
 	<% } %>
 
 	<script src="twine.js"></script>
-	<script>
 
-		setTimeout(function(){
-			var url = window.location.href
-			url = url.slice(url.lastIndexOf("/"), url.length)
-			if(url != "/play"){
-				return
-			}
-			var div = document.createElement("div");
-			div.setAttribute("style", "background-color:black;")
-			document.body.insertBefore(div, document.body.firstChild)
-
-
-			var btn = document.createElement("BUTTON");
-			btn.innerHTML = "Edit story"
-			//btn.setAttribute("style", )
-			btn.setAttribute("class", "subtle")
-
-			btn.setAttribute("style", "z-index:1;position:absolute; right:10%; top:10%;")
-			btn.setAttribute("title", "Play this story")
-
-			var i = document.createElement("i")
-			i.setAttribute("class", "fa fa-play fa-lg")
-
-			div.appendChild(btn)
-			btn.appendChild(i)
-
-			btn.addEventListener("click", function(){
-				var url = window.location.href
-				url = url.slice(0, url.lastIndexOf("/"));
-				console.log(url)
-				window.location = url
-				location.reload()
-			})
-
-			//document.body.appendChild(div)
-		}, 2000)
-
-	</script>
 </body>
 </html>
