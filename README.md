@@ -1,82 +1,28 @@
-twinejs
--------
+# twine_palvelin
 
-by Chris Klimas, Leon Arnott, Daithi O Crualaoich, Ingrid Cheung, Thomas Michael
-Edwards, Micah Fitch, Juhana Leinonen, Michael Savich, and Ross Smith
+## Tietoja
 
-### SYNOPSIS
+Muokattu versio twinejs-softasta. Alkuperäinen softa löytyy osoitteesta https://github.com/klembot/twinejs 
 
-This is a port of Twine to a local browser-based app. See
-[twinery.org](https://twinery.org) for more info.
+## Asennus
 
-The story formats in minified format under `story-formats/` exist in separate
-repositories:
+Tuore asennus, Ubuntu 16.04.5 LTS.
 
-* [Harlowe](https://bitbucket.org/_L_/harlowe)
-* [Paperthin](https://github.com/klembot/paperthin)
-* [Snowman](https://github.com/klembot/snowman)
-* [SugarCube](https://bitbucket.org/tmedwards/sugarcube)
+    sudo apt-get update
+    sudo apt-get upgrade
+    sudo apt-get install npm git curl nodejs build-essential make zsh
+    git clone https://github.com/digitarina/twine_palvelin.git
+    mv twine_palvelin/ /var
+    cd /var/twine_palvelin/
+    curl -sL https://deb.nodesource.com/setup_8.x | sudo bash -
+    sudo apt install nodejs
+    npm install
+    npm start
 
-### A NOTE ABOUT YARN
+nyt palvelin toimii portissa 8080, ctrl-C pysäyttää palvelun.
 
-Any time you read `npm` below, you can also use `yarn` ([more
-information](https://yarnpkg.com/)). Using `yarn` is a little more foolproof, as
-it ensures that everyone is using the exact same version of dependencies.
+Twinen voi buildata komennolla
 
-### INSTALL
-
-Run `npm install` at the top level of the directory to install all goodies.
-
-### BUILDING
-
-Run `npm start` to begin serving a development version of Twine to
-http://localhost:8080. This server will automatically update with changes you
-make. You can also create a dev build at `build/` with `npm run build`.
-
-`npm run lint` and `npm test` will lint and test the source code respectively.
-
-`npm run pot` will create a POT template file for localization at
-`src/locale/po/template.pot`. See Localization below for more information.
-
-`npm run nw` will build NW.js-based apps in `dist/nw`. In order to build Windows
-apps on OS X or Linux, you will need to have [Wine](https://www.winehq.org/)
-and [makensis](http://nsis.sourceforge.net/) installed.
-
-To build distributable versions of Twine, use `npm run package`. This will
-create ZIP archives and Windows installer packages under `dist/uploads`. An
-additional file named `2.json` is created under `dist/`. This contains
-information relevant to the autoupdater process, and is currently posted to
-http://twinery.org/latestversion/2.json.
-
-`npm run clean` will delete existing files in `build/` and `dist/`.
-
-### LOCALIZATION
-
-Would you like to help localize Twine for another language? Awesome! You don't
-need to know JavaScript to do so. Here's how it works:
-
-1. Download
-[template.pot](https://bitbucket.org/klembot/twinejs/raw/4b64592fd47dd6678d9d0ebb0f07067f1bfaeabb/locale/po/template.pot)
-from the repository.
-
-2. Use a translation application like [Poedit](http://poedit.net/) to create a
-.po file with the source text translated. If you are using Poedit, get started
-by choosing **New from POT/PO File** from the **File** menu. Make sure to name
-your po file according to the [IETF locale naming
-convention](https://en.wikipedia.org/wiki/IETF_language_tag) -- Poedit can help
-suggest that as well. For example, a generic French translation should be named
-`fr.po`, while an Australian English one would be named `en-au.po`.
-
-3. Finally, two other things are needed: an SVG-formatted image of the flag
-that should be associated with your language, and what native speakers call the
-language you are localizing to (e.g. Fran&ccedil;ais for French speakers).
-[Wikimedia
-Commons](https://commons.wikimedia.org/wiki/Category:SVG_flags_by_country) is
-your best bet for nice-looking SVG flags. Obviously, whatever image you provide
-must either be in the public domain or otherwise OK to use in Twine without any
-compensation.
-
-4. If you're comfortable using Mercurial, then you can open a pull request to
-have your localization added. Please place it in the `src/locale/po` directory. If
-you aren't, you can instead open a bug tracker issue and attach your PO file,
-flag image, and language name and we'll take it from there.
+	npm run build
+	
+jolloin valmis buildi tulee build-kansioon. Tämän voi siirtää muualle haluttuun weppikansioon, esim. https://github.com/digitarina/twine_palvelin
