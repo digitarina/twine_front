@@ -25,4 +25,6 @@ Twinen voi buildata komennolla
 
 	npm run build
 	
-jolloin valmis buildi tulee build-kansioon. Tämän voi siirtää muualle haluttuun weppikansioon, esim. https://github.com/digitarina/twine_palvelin
+jolloin valmis buildi tulee build-kansioon. Tämän voi siirtää muualle haluttuun weppikansioon, esim. https://github.com/digitarina/twine_palvelin_2
+
+* Huom! Share-toiminto on konffattu toimimaan localhostissa. Jos haluat käyttää palvelinta, vaihda localhostin tilalle IP tai verkko-osoite src/file/post.js -tiedostossa.
